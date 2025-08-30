@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Cities\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
@@ -52,6 +53,10 @@ class CitiesTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make(),
+                ForceDeleteBulkAction::make(),
+                RestoreBulkAction::make(),
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -28,7 +28,7 @@ class StateResource extends Resource
 
     protected static ?string $modelLabel = 'Estados';
     protected static ?string $navigationLabel = 'Estados';
-    protected static string | UnitEnum | null $navigationGroup = 'System Management';
+    protected static string | UnitEnum | null $navigationGroup = 'Administración del sistema';
     protected static ?int $navigationSort = 6;
 
 

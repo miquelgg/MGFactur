@@ -29,7 +29,7 @@ class CityResource extends Resource
 
     protected static ?string $modelLabel = 'Ciudades';
     protected static ?string $navigationLabel = 'Ciudades';
-    protected static string | UnitEnum | null $navigationGroup = 'System Management';
+    protected static string | UnitEnum | null $navigationGroup = 'Administración del sistema';
     protected static ?int $navigationSort = 8;
 
     public static function form(Schema $schema): Schema

@@ -48,6 +48,9 @@ class UserForm
                 ->schema([
                     TextInput::make('name')
                         ->required(),
+                    Select::make('departaments.name')
+                        ->label('Departamento')
+                        ->relationship('departaments', 'name'),
                     TextInput::make('email')
                         ->label('Email address')
                         ->email()

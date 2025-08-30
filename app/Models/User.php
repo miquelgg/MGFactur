@@ -27,6 +27,7 @@ class User extends Authenticatable
         'city_id',
         'address',
         'postal_code',
+        'departament',
     ];
 
     /**
@@ -78,5 +79,19 @@ class User extends Authenticatable
         return $this->belongsTo(City::class);
     }
 
+    public function calendars()
+    {
+        return $this->belongsToMany(Calendar::class, 'table_user_calendar');
+    }
+
+    public function departaments()
+    {
+        return $this->belongsToMany(Departament::class, 'table_user_departament');
+    }
+
+    public function holidays()
+    {
+        return $this->hasMany(Holiday::class);
+    }
 
 }

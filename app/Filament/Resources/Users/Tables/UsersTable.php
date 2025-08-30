@@ -41,6 +41,11 @@ class UsersTable
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('departaments.name')
+                    ->label('Departamento')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('country.name')
                     ->label('Pais')
                     ->sortable()
@@ -78,7 +83,7 @@ class UsersTable
                         false: fn ($query) => $query->whereNull('email_verified_at'),
                     ),
 
-
+                  
                 /*                 
                 Filter::make('verified')
                     ->query(fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
