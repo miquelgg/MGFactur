@@ -26,6 +26,11 @@ class StatsOverview extends StatsOverviewWidget
                 ->color('info')
                 ->icon('heroicon-o-calendar-days')
                 ->descriptionIcon('heroicon-o-calendar-days'),
+            Stat::make('Prueba', '192.1K')
+                ->description('Datos ficticios todavia')
+                ->chart([7, 2, 10, 3, 15, 4, 17])
+                ->color('success')
+                ->descriptionIcon('heroicon-m-arrow-trending-up'),
         ];
     }
 }

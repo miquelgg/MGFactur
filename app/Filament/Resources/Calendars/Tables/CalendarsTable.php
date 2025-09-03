@@ -22,7 +22,7 @@ class CalendarsTable
                     ->label('Calendario')
                     ->searchable(),
                 TextColumn::make('year')
-                    ->numeric()
+                    ->numeric(locale: 'es')
                     ->sortable(),
                 IconColumn::make('active')
                     ->boolean(),

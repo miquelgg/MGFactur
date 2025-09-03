@@ -17,6 +17,14 @@ use Filament\Tables\Filters\TernaryFilter;
 # Para borrar registros individualmente
 use Filament\Actions\DeleteAction;
 
+# Para imágenes
+use Filament\Tables\Columns\ImageColumn;
+
+# Para la accion personalizada de Verified
+use Filament\Actions\Action;
+use App\Models\User;
+
+
 class UsersTable
 {
     public static function configure(Table $table): Table
@@ -46,6 +54,10 @@ class UsersTable
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
+
+                ImageColumn::make('image')
+                    ->visibility('private'),
+
                 TextColumn::make('country.name')
                     ->label('Pais')
                     ->sortable()
@@ -97,7 +109,25 @@ class UsersTable
                 ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),   // Añadimos la opción de delete a las filas de la tabla
-            ])
+                Action::make('Verify')
+                ->icon('heroicon-o-check')
+                #->action(fn (User $record): void => $record->update(['email_verified_at' => now()])),
+                ->action(function (User $user){
+                    $user->email_verified_at = date('Y-m-d H:i:s');
+                    $user->save();
+                }),
+
+                Action::make('Unverify')
+                ->icon('heroicon-m-x-circle')
+                #->action(fn (User $record): void => $record->update(['email_verified_at' => now()])),
+                ->action(function (User $user){
+                    $user->email_verified_at = null;
+                    $user->save();
+                }),
+
+
+
+           ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

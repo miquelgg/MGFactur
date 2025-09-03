@@ -14,10 +14,10 @@ class CityForm
         return $schema
             ->components([
                 Select::make('country_id')
-                    ->relationship('country', 'name')
+                    ->relationship(name: 'country', titleAttribute: 'name')
                     ->required(),
                 Select::make('state_id')
-                    ->relationship('state', 'name')
+                    ->relationship(name: 'state', titleAttribute: 'name')
                     ->required(),
                 TextInput::make('name')
                     ->required(),

@@ -16,6 +16,7 @@ use Illuminate\Support\Collection;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 # use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\FileUpload;
 
 
 
@@ -50,7 +51,7 @@ class UserForm
                         ->required(),
                     Select::make('departaments.name')
                         ->label('Departamento')
-                        ->relationship('departaments', 'name'),
+                        ->relationship(name: 'departaments', titleAttribute: 'name'),
                     TextInput::make('email')
                         ->label('Email address')
                         ->email()
@@ -60,6 +61,12 @@ class UserForm
                         ->password()
                         ->hiddenOn('edit')
                         ->required(),
+
+                    FileUpload::make('image')
+                    ->image()
+                    ->imageEditor(),
+
+
                 ])
                 ->columns(2)
                 ->columnSpanFull(),

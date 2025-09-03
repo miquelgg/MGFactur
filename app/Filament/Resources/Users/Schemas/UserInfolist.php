@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
+use Filament\Infolists\Components\ImageEntry;
 
 
 class UserInfolist
@@ -43,6 +44,8 @@ class UserInfolist
                         ->label('Departamento'),
                     TextEntry::make('email_verified_at')
                         ->dateTime(),
+                    ImageEntry::make('image')
+                        ->visibility('private'),
                     TextEntry::make('created_at')
                         ->dateTime(),
                     TextEntry::make('updated_at')

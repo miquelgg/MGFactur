@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Filament\Resources\Holidays\Schemas;
+namespace App\Filament\App\Resources\Holidays\Schemas;
 
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\DatePicker;
 
 class HolidayForm
 {
@@ -13,22 +13,11 @@ class HolidayForm
     {
         return $schema
             ->components([
-/*                 TextInput::make('calendar_id')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('type')
-                    ->required()
-                    ->default('pendiente'),                    
-                    */
-             
                 Select::make('calendar_id')
                     ->relationship(name: 'calendar', titleAttribute: 'name')
                     ->required(),
 
-                Select::make('user_id')
+            /*  Select::make('user_id')
                     ->relationship(name: 'user', titleAttribute: 'name')
                     ->required(),
 
@@ -36,13 +25,12 @@ class HolidayForm
                     ->options([
                         'pendiente' => 'Pendiente',
                         'aprobada' => 'Aprobada',
-                        'rechazada' => 'Rechazada',
+                        'rechazada' => 'Rechazada', 
                     ])
                     ->required(),
-
+            */
                 DatePicker::make('day')
                     ->required(),
-
             ]);
     }
 }

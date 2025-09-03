@@ -8,4 +8,8 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateCalendar extends CreateRecord
 {
     protected static string $resource = CalendarResource::class;
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }    
 }
