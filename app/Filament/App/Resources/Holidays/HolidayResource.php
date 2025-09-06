@@ -25,6 +25,28 @@ class HolidayResource extends Resource
     protected static ?string $model = Holiday::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $modelLabel = 'Vacaciones';
+    protected static ?string $navigationLabel = 'Vacaciones';
+
+    # Numero de vacaciones pendientes en el menu de navegación
+    public static function getNavigationBadge(): ?string
+    {
+        #return static::getModel()::count();
+        return parent::getEloquentQuery()->where('user_id', auth()->id())->where('type', 'pendiente')->count();
+    }
+
+    # Tooltip de navegación
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Nº de vacaciones pendientes';
+    }    
+
+    # Para ver solo los del usuario logueado
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('user_id', auth()->id());
+        #return parent::getEloquentQuery()->where('user_id', Auth::user()->id);
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -47,16 +69,6 @@ class HolidayResource extends Resource
             //
         ];
     }
-
-
-    # Para ver solo los del usuario logueado
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->where('user_id', auth()->id());
-        #return parent::getEloquentQuery()->where('user_id', Auth::user()->id);
-    }
-
-
 
     public static function getPages(): array
     {

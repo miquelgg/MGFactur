@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Pages\Enums\SubNavigationPosition; 
+use Filament\Actions\Action;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -54,6 +55,11 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->userMenuItems([
+                Action::make('App')
+                    ->url('/app')
+                    ->icon('heroicon-o-cog-6-tooth'),
+            ])            
             ->authMiddleware([
                 Authenticate::class,
             ]);

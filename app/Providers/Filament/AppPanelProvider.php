@@ -18,7 +18,12 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationItem;
+use App\Filament\Pages\Settings;
+use App\Filament\Resources\Users\UserResource;
+use function Filament\Support\original_request;
+use Filament\Actions\Action;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -54,6 +59,20 @@ class AppPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->databaseNotifications()
+            ->navigationItems([
+                NavigationItem::make('Mi Github')
+                    ->url('https://github.com/miquelgg/MGFactur', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-presentation-chart-line')
+                    ->group('Github')
+                    ->sort(3),
+            ])
+            # ->topNavigation()    # Para poner el menu arriba horizontal
+            ->userMenuItems([
+                Action::make('Admin')
+                    ->url('/admin')
+                    ->label('Ir a Admin')
+                    ->icon('heroicon-o-cog-6-tooth'),
+            ])
             ->authMiddleware([
                 Authenticate::class,
             ]);

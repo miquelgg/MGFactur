@@ -9,6 +9,11 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+
 
 class HolidaysTable
 {
@@ -59,6 +64,30 @@ class HolidaysTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+            ])
+            ->bulkActions([
+                DeleteBulkAction::make(),
+
+                ExportBulkAction::make()
+                    ->exports([
+                            #ExcelExport::make()
+                            ExcelExport::make('form')->fromForm(),
+                            ExcelExport::make('table')->fromTable()
+                                ->fromModel() // <- evita el mapeo a columnas montadas
+                                ->withColumns([
+                                    Column::make('calendar.name')->heading('Calendario'),
+                                    Column::make('user.name')->heading('Usuario'),
+                                    Column::make('day')
+                                        ->heading('Día')
+                                        ->formatStateUsing(
+                                            fn ($record) => optional($record->day)->format('Y-m-d')
+                                        ),
+                                    Column::make('type')->heading('Tipo'),
+                                ])
+                                ->askForFilename('NombrePorDefecto') // <- permite al usuario definir el nombre del archivo
+                                ->askForWriterType() // <- permite al usuario seleccionar el tipo de archivo
+                                ->withFilename('holidays-export'),
+                    ]),                
             ]);
     }
 }

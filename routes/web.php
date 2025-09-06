@@ -4,6 +4,7 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,5 +21,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
+
+// Route::get('/pruebas/{user]', function () {
+//     $pdf = PDF::loadView('pdf.example');
+//     return $pdf->download('example.pdf');
+// })->name('pdf.example');
+
+Route::get('/pdf/generate/holidays/{user}', [PdfController::class,'HolidaysRecords'])->name('pdf.example');
 
 require __DIR__.'/auth.php';
